@@ -55,7 +55,8 @@
               "owner": "codingwithcn",
               "name": "Captalist"
             }
-          }
+          },
+          "draft": true
         }
       ]
     }
