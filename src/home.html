@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Captalist</title>
+    <link rel="stylesheet" href="home.css">
+  </head>
+  <body>
+    <div>
+      <div class='join_create' id='join_create'>
+        <button class='join_but' id='join_but' onclick='openForm()'>Join A Server</button>
+        <div class='join_popup' id='join_popup'>
+          <div class="join_container">
+            <h1>Join Server</h1>
+          
+            <label for="server"><b>Server Name:</b></label>
+            <input type="text" class='text' placeholder="Enter Server Name" name="server" id='server_name'required>
+          
+            <label for="psw"><b>Server Password:</b></label>
+            <input type="password" class='text' placeholder="Enter Password" name="psw" id='psw' required>
+            
+            <div id='join_server_err'></div>
+            <button type="submit" class="btn" onclick='joinServer()'>Login</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </div>
+        </div>
+        <button class='create_but' onclick='openCreateForm()'>Create A Server</button>
+        <div class='join_popup' id='create_popup'>
+          <div class='join_container'>
+            <h1>Create A Server</h1>
+
+            <label for="server"><b>Server Name:</b></label>
+            <input type="text" class='text' placeholder="Enter Server Name" name="server" id="create_server_name" required>
+
+            <label for="psw"><b>Server Password:</b></label>
+            <input type="password" class='text' placeholder="Enter Password" name='psw' id='create_server_psw' required>
+
+            <div id='create_server_err'></div>
+            <button type="submit" class="btn" onclick='CreateServer()' >Create Server</button>
+            <button type="button" class="btn cancel" onclick='closeCreateForm()'>Close</button>
+          </div>
+        </div>
+        <button class='logout_but' onclick='logout()'>Log Out</button>
+      </div>
+      <div id='server_data' class='server_data'>
+        <h1>Your Servers</h1>
+        <div id='your_server' class='your_server'></div>
+        <h1>Others Servers</h1>
+        <div id='other_server' class='other_server'></div>
+      </div>
+    </div>
+    <script>let user_ids = null;</script>
+    <script>
+      let your_Servers=[];
+      let others_Servers = [];
+
+      const ipcRenderer = require('electron').ipcRenderer;
+      document.body.addEventListener('click', event => {
+        if (event.target.tagName.toLowerCase() === 'a'){
+          event.preventDefault();
+          require('electron').shell.openExternal(event.target.href);
+        }
+      })
+      ipcRenderer.on('Servers', (event, message)=>{
+        console.log("SERVER DATA")
+        console.log(message);
+        let yours = message.You_Own;
+        let others = message.SomeOne_Else_Own;
+        user_ids = message.id;
+        
+        for (let i=0; i < yours.slice(your_Servers.length).length; i++){
+          data = yours.slice(your_Servers.length)[i];
+          add_to_your_Servers(data)
+        }
+        for (let i=0; i < others.slice(others_Servers.length).length; i++){
+          data = others.slice(others_Servers.length)[i];
+          add_to_others_servers(data);
+        }
+        your_Servers = yours;
+        others_Servers = others;
+      });
+    </script>
+    <script src='render.js'></script>
+    <script src='create_country.js'></script>
+    <script src='home.js'>
+    </script>
+  </body>
+</html>

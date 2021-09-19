@@ -1,0 +1,30 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: auto;
+  max-width: 38rem;
+  padding: 2rem;
+  background-color: White;
+}
+
+.log_form{
+  display: grid;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  place-self: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
+.log_form input {
+  margin-bottom: 10px;
+}
+.log_form button {
+  background-color: #a58f2a;
+  text-align: center;
+  color: white;
+  font-size: 19px;
+}
