@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, Tray, nativeImage } = require('electron');
-
+const autoUpdater = require("electron-updater");
 const path = require('path');
 
 const fetch = require('node-fetch')
@@ -294,7 +294,8 @@ const image = nativeImage.createFromPath(
 );
 app.whenReady().then(() => {
   tray = new Tray(image.resize({ width: 600, height: 600 }))
-  tray.setTitle('Captalist')
+  tray.setTitle('Captalist');
+  autoUpdater.checkForUpdatesAndNotify();
 })
 
 // In this file you can include the rest of your app's specific main process
