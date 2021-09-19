@@ -9,6 +9,9 @@
     "package": "npx electron-forge package",
     "make": "npx electron-forge make",
     "publish": "npx electron-forge publish",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
@@ -61,7 +64,8 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.9",
     "node-fetch": "^2.6.1",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "yarn": "^1.22.11"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.57",
@@ -70,6 +74,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
     "@electron-forge/maker-zip": "^6.0.0-beta.57",
     "@electron-forge/publisher-github": "^6.0.0-beta.61",
-    "electron": "13.1.4"
+    "electron": "13.1.4",
+    "electron-builder": "^22.11.7"
   }
 }
