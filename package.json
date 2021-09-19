@@ -13,7 +13,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build": "electron-builder --mac --windows --linux",
     "release": "electron-builder --mac --windows --linux --publish always",
-    "pack": "electron-builder --dir",
+    "pack": "npx electron-builder --dir",
     "dist": "electron-builder"
   },
   "keywords": [],
