@@ -10,8 +10,6 @@
     "make": "npx electron-forge make",
     "publish": "npx electron-forge publish",
     "postinstall": "npx electron-builder install-app-deps",
-    "build": "electron-builder --mac --windows --linux",
-    "release": "electron-builder --mac --windows --linux --publish always",
     "lint": "echo \"No linting configured\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
