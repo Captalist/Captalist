@@ -6,8 +6,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
-    "package": "npx electron-forge package",
-    "make": "npx electron-forge make",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
     "publish": "npx electron-forge publish",
     "postinstall": "npx electron-builder install-app-deps",
     "lint": "echo \"No linting configured\"",
@@ -51,7 +51,9 @@
           "config": {
             "repository": {
               "owner": "codingwithcn",
-              "name": "Captalist"
+              "name": "Captalist",
+              "type" : "git",
+              "url" : "https://github.com/Captalist/Captalist.git"
             }
           },
           "draft": true

@@ -1,10 +1,13 @@
 const { app, BrowserWindow, ipcMain, Tray, nativeImage } = require('electron');
-const autoUpdater = require("electron-updater");
+
+const { autoUpdater } = require('electron-updater');
+
 const path = require('path');
 
 const fetch = require('node-fetch')
 
 const db_func = require(path.join(__dirname, 'important_db_func'));
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -83,6 +86,7 @@ class Users {
     return this.server_datas
   }
 }
+
 class Captalist {
 
   constructor(parent, parent_name, parent_func, width, height, webpref) {
@@ -96,9 +100,25 @@ class Captalist {
     this.triggers = {};
     this.currentWindow = null;
     this.close_before = null;
-    this.user = new Users(null, null, null)
+    this.user = new Users(null, null, null);
+    this.update_window = null;
   }
 
+  create_update_window = () => {
+    this.update_window = new BrowserWindow({
+      width: 300,
+      height: 200,
+      show: true,
+      webPreferences: this.webpref,
+      alwaysOnTop: true,
+      frame: false
+    });
+    this.update_window.loadFile(path.join(__dirname, "auto_update.html"));
+    this.update_window.show()
+    this.update_window.on("closed", function(){
+      this.update_window = null;
+    })
+  }
   add_child = (name, file, open_dev, callback, parent=false) => {
     if (name in this.windows){
       return "Name already exist"
@@ -164,6 +184,7 @@ class Captalist {
   close_all = () => {
     app.quit()
   }
+
   openWindow =  (name) => {
     let keys = Object.keys(this.triggers)
     if (keys.includes(name)){
@@ -201,6 +222,7 @@ const cap = new Captalist(null, 'Captalist', null, 800,
 })
 
 console.log(cap.add_child('Captalist', 'index.html', false, (win)=>{console.log("DONE")},true))
+
 console.log(cap.add_child('Home', 'home.html', false, (win)=>{
   setInterval(()=>{
     if (cap.user.id != null){
@@ -208,6 +230,7 @@ console.log(cap.add_child('Home', 'home.html', false, (win)=>{
     }
   }, 10000)
 }))
+
 console.log(cap.add_child('Game', 'game.html', false, (win)=>{
   console.log("Done")
 }))
@@ -221,9 +244,11 @@ app.on('ready', run);
 ipcMain.on('OpenWindow', (event, data) => {
   console.log(cap.openWindow(data.name))
 })
+
 ipcMain.on('GIVESERVERDATA',(event, data)=>{
   cap.currentWindow.webContents.send('ServerData', {'Data': cap.user.current_server_data, 'SERVER_ID': cap.user.current_server, 'User_ID': cap.user.id})
 })
+
 ipcMain.on('login', (event, data) => {
   cap.user.create_user(data.id, data.name, data.password)
   cap.openWindow('Home');
@@ -246,6 +271,21 @@ ipcMain.on('GameOn', (event, data)=>{
   cap.user.current_server_data = data;
   cap.openWindow('Game')
 })
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
+
+ipcMain.on("close_update_window", ()=>{
+  if (cap.update_window != null){
+    cap.update_window.close()
+  }
+})
+
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -280,6 +320,7 @@ app.on('before-quit', event => {
       process.exit(0)
     })
 })
+
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
@@ -289,9 +330,11 @@ app.on('activate', () => {
 });
 
 let tray = null
+
 const image = nativeImage.createFromPath(
   path.join(__dirname, '/Assests/Facebook Post 940x788 px.png')
 );
+
 app.whenReady().then(() => {
   tray = new Tray(image.resize({ width: 600, height: 600 }))
   tray.setTitle('Captalist');
@@ -300,3 +343,14 @@ app.whenReady().then(() => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+autoUpdater.on('update-available', () => {
+  cap.create_update_window()
+});
+
+autoUpdater.on('update-available', () => {
+  cap.update_window.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+  cap.update_window.webContents.send('update_downloaded');
+});
