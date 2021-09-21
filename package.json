@@ -1,7 +1,7 @@
 {
   "name": "captalist",
   "productName": "Captalist",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
@@ -52,8 +52,8 @@
             "repository": {
               "owner": "codingwithcn",
               "name": "Captalist",
-              "type" : "git",
-              "url" : "https://github.com/Captalist/Captalist.git"
+              "type": "git",
+              "url": "https://github.com/Captalist/Captalist.git"
             }
           },
           "draft": true
