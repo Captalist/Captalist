@@ -1,7 +1,7 @@
 {
   "name": "captalist",
   "productName": "Captalist",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
@@ -85,5 +85,5 @@
     "extraResources": [
       "databaseFolder"
     ]
-}
+  }
 }
