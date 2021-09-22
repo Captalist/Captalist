@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain, Tray, nativeImage } = require('electron');
 
-const { autoUpdater } = require('electron-updater');
+require('update-electron-app')()
 
 const path = require('path');
 
@@ -338,19 +338,7 @@ const image = nativeImage.createFromPath(
 app.whenReady().then(() => {
   tray = new Tray(image.resize({ width: 600, height: 600 }))
   tray.setTitle('Captalist');
-  autoUpdater.checkForUpdatesAndNotify();
 })
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-
-autoUpdater.on('update-available', () => {
-  cap.create_update_window()
-});
-
-autoUpdater.on('update-available', () => {
-  cap.update_window.webContents.send('update_available');
-});
-autoUpdater.on('update-downloaded', () => {
-  cap.update_window.webContents.send('update_downloaded');
-});
