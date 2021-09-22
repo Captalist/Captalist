@@ -29,6 +29,7 @@ const table_exist = () => {
  */
 const does_db_exit_if_not_create = () =>{
     // open the database 
+    console.log(db_file_loc)
     if (fs.existsSync(db_file_loc)){
         table_exist()
     }else {

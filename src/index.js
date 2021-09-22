@@ -158,12 +158,9 @@ class Captalist {
         this.parent = new BrowserWindow({
           width: this.width,
           height: this.height,
-          //fullscreen: true,
-          simpleFullscreen: true,
-          webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-          },
+          fullscreen: true,
+          //simpleFullscreen: true,
+          webPreferences: this.webpref,
           icon: image.resize({ width: 600, height: 600 }),
           alwaysOnTop: true,
           frame: false
@@ -311,7 +308,8 @@ const request = async (link, options, callback) => {
 app.on('before-quit', event => {
   event.preventDefault()
   console.log("Before Quit event is firing")
-  request('https://captalistserver.learncode2.repl.co/sign_out', {
+  if (cap.user.id != null){
+    request('https://captalistserver.learncode2.repl.co/sign_out', {
       method: 'POST',
       body: JSON.stringify({id: cap.user.id}),
       credentials: 'include',
@@ -321,6 +319,7 @@ app.on('before-quit', event => {
       console.log('Sent SignOut')
       process.exit(0)
     })
+  }else{process.exit(0)}
 })
 
 app.on('activate', () => {
