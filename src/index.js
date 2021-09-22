@@ -104,21 +104,6 @@ class Captalist {
     this.update_window = null;
   }
 
-  create_update_window = () => {
-    this.update_window = new BrowserWindow({
-      width: 300,
-      height: 200,
-      show: true,
-      webPreferences: this.webpref,
-      alwaysOnTop: true,
-      frame: false
-    });
-    this.update_window.loadFile(path.join(__dirname, "auto_update.html"));
-    this.update_window.show()
-    this.update_window.on("closed", function(){
-      this.update_window = null;
-    })
-  }
   add_child = (name, file, open_dev, callback, parent=false) => {
     if (name in this.windows){
       return "Name already exist"
