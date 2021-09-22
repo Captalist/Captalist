@@ -214,6 +214,8 @@ class Captalist {
 
 }
 
+db_func.does_db_exit_if_not_create()
+
 const cap = new Captalist(null, 'Captalist', null, 800, 
 600, {
   nodeIntegration: true,

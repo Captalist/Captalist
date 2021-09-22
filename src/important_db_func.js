@@ -1,6 +1,46 @@
 const sqlite3 = require('sqlite3').verbose();
+var fs = require('fs');
 const path = require('path');
 const db_file_loc = path.join(__dirname, "client.db")
+
+/**
+ * Checks if table exist in database, if it does not, 
+ * it creates it
+ */
+const table_exist = () => {
+    const sql = `
+    CREATE TABLE IF NOT EXISTS users (
+        "id"	INTEGER NOT NULL,
+        "server_id"	INTEGER,
+        "name"	INTEGER,
+        "password"	INTEGER,
+        "signed_in"	INTEGER,
+        PRIMARY KEY("id" AUTOINCREMENT)
+    );
+    `
+    let db = new sqlite3.Database(db_file_loc, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE);
+    db.run(sql)
+    db.close()
+}
+
+/**
+ * Checks if database exist, if it does not it creates it
+ * Then it checks if table exist, if it does notit creates it
+ */
+const does_db_exit_if_not_create = () =>{
+    // open the database 
+    if (fs.existsSync(db_file_loc)){
+        table_exist()
+    }else {
+        fs.open(db_file_loc, 'w', function (err, 
+            file) {
+            if (err) throw err;
+            console.log('Saved!');
+        });
+        table_exist()
+    }
+}
+
 const users_signed_in = (callback) => {
     // open the database
     let db = new sqlite3.Database(db_file_loc, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE);
@@ -72,5 +112,6 @@ module.exports = {
     sign_out: sign_out,
     sign_in: sign_in,
     user_exist: user_exist, 
-    create_user: create_user
+    create_user: create_user,
+    does_db_exit_if_not_create: does_db_exit_if_not_create
 }
