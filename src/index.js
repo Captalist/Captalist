@@ -3,7 +3,6 @@ const { app, BrowserWindow, ipcMain, Tray, nativeImage } = require('electron');
 require('update-electron-app')({
   repo: 'Captalist/Captalist',
   updateInterval: '5 minutes',
-  host: "https://github.com"
 })
 
 const path = require('path');
