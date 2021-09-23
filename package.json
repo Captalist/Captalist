@@ -15,8 +15,8 @@
     "dist": "electron-builder"
   },
   "repository": {
-    "type":"git",
-    "url":"git+https://github.com/Captalist/Captalist.git"
+    "type": "git",
+    "url": "git+https://github.com/Captalist/Captalist.git"
   },
   "keywords": [],
   "author": {
@@ -67,6 +67,7 @@
   },
   "dependencies": {
     "custom-electron-titlebar": "^3.2.7",
+    "electron-builder-squirrel-windows": "^22.14.2",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.9",
     "node-fetch": "^2.6.1",
