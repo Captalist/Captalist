@@ -14,7 +14,10 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
-  "repository": "https://github.com/Captalist/Captalist",
+  "repository": {
+    "type":"git",
+    "url":"git+https://github.com/Captalist/Captalist.git"
+  },
   "keywords": [],
   "author": {
     "name": "Chidozie",
@@ -84,6 +87,12 @@
   "build": {
     "extraResources": [
       "databaseFolder"
-    ]
+    ],
+    "win": {
+      "target": "squirrel"
+    },
+    "squirrelWindows": {
+      "iconUrl": "https://github.com/Captalist/Captalist/blob/main/src/Assests/Facebook%20Post%20940x788%20px@5x.png?raw=true"
+    }
   }
 }
