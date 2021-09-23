@@ -4,6 +4,19 @@ require('update-electron-app')()
 
 const path = require('path');
 
+require(path.resolve(__dirname, "debug_console")) // This module is used to handle debugging in production
+
+// Used to Debug Releases that won't have a console... Comment out when devloping
+const fs = require("fs");
+try {
+  fs.unlinkSync(path.resolve(process.resourcesPath, "console.log"))
+  //We will need to delete the previous log, so we will only deal with recent errors
+} catch(err) {
+  console.error(err)
+}
+console.file(path.resolve(process.resourcesPath, "console.log"));
+// End of things you will want to comment out during development
+
 const fetch = require('node-fetch')
 
 const db_func = require(path.join(__dirname, 'important_db_func'));
