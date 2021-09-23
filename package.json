@@ -19,10 +19,7 @@
     "url": "git+https://github.com/Captalist/Captalist.git"
   },
   "keywords": [],
-  "author": {
-    "name": "Chidozie",
-    "email": "codingwithcn@gmail.com"
-  },
+  "author": "Chidozie Nnaji",
   "license": "MIT",
   "config": {
     "forge": {
@@ -89,12 +86,26 @@
     "extraResources": [
       "databaseFolder"
     ],
+    "linux": {
+      "category": "Development",
+      "publish": false,
+      "target": "AppImage"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
     "win": {
-      "target": "nsis"
+      "target": "squirrel"
     },
     "squirrelWindows": {
       "iconUrl": "https://github.com/Captalist/Captalist/blob/main/src/Assests/Facebook%20Post%20940x788%20px@5x.png?raw=true"
     }
+  },
+  "updater": {
+    "url": "https://raw.githubusercontent.com/Captalist/Captalist/main/updates.json"
+  },
+  "engines": {
+    "node": ">=6.0"
   },
   "nsis": {
     "artifactName": "${productName}-Setup-${version}.${ext}",
