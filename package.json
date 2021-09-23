@@ -90,10 +90,19 @@
       "databaseFolder"
     ],
     "win": {
-      "target": "squirrel"
+      "target": "nsis"
     },
     "squirrelWindows": {
       "iconUrl": "https://github.com/Captalist/Captalist/blob/main/src/Assests/Facebook%20Post%20940x788%20px@5x.png?raw=true"
     }
+  },
+  "nsis": {
+    "artifactName": "${productName}-Setup-${version}.${ext}",
+    "oneClick": true,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "runAfterFinish": true,
+    "deleteAppDataOnUninstall": true,
+    "differentialPackage": true
   }
 }
