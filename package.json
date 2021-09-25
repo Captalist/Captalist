@@ -14,10 +14,7 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Captalist/Captalist.git"
-  },
+  "repository": "https://github.com/Captalist/Captalist",
   "keywords": [],
   "author": "Chidozie Nnaji",
   "license": "MIT",
@@ -86,31 +83,19 @@
     "extraResources": [
       "databaseFolder"
     ],
+    "productName": "Captalist",
+    "copyright": "Copyright © 2021 ${author}",
     "linux": {
       "category": "Development",
       "publish": false,
       "target": "AppImage"
     },
     "mac": {
+      "icon": "src/Assests/Facebook Post 940x788 px.png",
       "category": "public.app-category.developer-tools"
     },
     "win": {
-      "target": "squirrel"
-    },
-    "squirrelWindows": {
-      "iconUrl": "https://github.com/Captalist/Captalist/blob/main/src/Assests/Facebook%20Post%20940x788%20px@5x.png?raw=true"
+      "icon": "src/Assests/Facebook Post 940x788 px.png"
     }
-  },
-  "updater": {
-    "url": "https://raw.githubusercontent.com/Captalist/Captalist/main/updates.json"
-  },
-  "nsis": {
-    "artifactName": "${productName}-Setup-${version}.${ext}",
-    "oneClick": true,
-    "perMachine": false,
-    "allowToChangeInstallationDirectory": true,
-    "runAfterFinish": true,
-    "deleteAppDataOnUninstall": true,
-    "differentialPackage": true
   }
 }

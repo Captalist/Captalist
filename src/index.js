@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, Tray, nativeImage } = require('electron');
 
+const {autoUpdater} = require("electron-updater");
 
 const path = require('path');
 
@@ -233,13 +234,18 @@ console.log(cap.add_child('Game', 'game.html', false, (win)=>{
 
 let run = () => {
   cap.run()
-  require('update-electron-app')({
-    repo: 'Captalist/Captalist',
-    updateInterval: '15 minutes',
-  })
+  autoUpdater.checkForUpdates();
 }
 
 app.on('ready', run);
+
+ipcMain.on("quitAndInstall", (event, arg) => {
+  autoUpdater.quitAndInstall();
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+  cap.currentWindow.webContents.send('updateReady')
+});
 
 ipcMain.on('OpenWindow', (event, data) => {
   console.log(cap.openWindow(data.name))
