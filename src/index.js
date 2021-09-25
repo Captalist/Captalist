@@ -1,9 +1,5 @@
 const { app, BrowserWindow, ipcMain, Tray, nativeImage } = require('electron');
 
-require('update-electron-app')({
-  repo: 'Captalist/Captalist',
-  updateInterval: '5 minutes',
-})
 
 const path = require('path');
 
@@ -237,6 +233,10 @@ console.log(cap.add_child('Game', 'game.html', false, (win)=>{
 
 let run = () => {
   cap.run()
+  require('update-electron-app')({
+    repo: 'Captalist/Captalist',
+    updateInterval: '15 minutes',
+  })
 }
 
 app.on('ready', run);
