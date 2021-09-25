@@ -1,5 +1,3 @@
-const ipcRenderer = require('electron').ipcRenderer;
-
 // wait for an updateReady message
 ipcRenderer.on('updateReady', function(event, text) {
     // changes the text of the button

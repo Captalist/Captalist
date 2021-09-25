@@ -340,7 +340,7 @@ app.on('activate', () => {
 let tray = null
 
 const image = nativeImage.createFromPath(
-  path.join(__dirname, '/Assests/Facebook Post 940x788 px.png')
+  path.join(process.resourcesPath, 'Facebook Post 940x788 px.png')
 );
 
 app.whenReady().then(() => {
