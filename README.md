@@ -2,7 +2,7 @@
   <img src="https://github.com/Captalist/CaptalistServer/blob/main/Facebook%20Post%20940x788%20px%405x.png" height=250>
 </p>
 
-<h1 align="center">CaptalistServer - Server Code for the Captalist game</h1>
+<h1 align="center">Captalist</h1>
 <p align="center">
   <a href="https://github.com/Captalist/CaptalistServer#important-information">Important Information |</a>
   <a href="https://github.com/Captalist/CaptalistServer#important-changes">Important Changes |</a>
